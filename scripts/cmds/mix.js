@@ -2,7 +2,7 @@ const axios = require("axios");
 
 module.exports = {
 	config: {
-		name: 'mixtral',
+		name: 'mix',
 		version: '1.0.1',
 		author: 'Null69 & Aliester Crowley',
 		countDown: 10,
@@ -34,7 +34,7 @@ module.exports = {
 		}
 
 		if (!prompt) {
-			message.reply("Please provide a query.");
+			message.reply("Please provide a query or question ");
 			return;
 		}
 
