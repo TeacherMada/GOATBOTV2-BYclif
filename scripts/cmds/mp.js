@@ -5,7 +5,7 @@ module.exports = {
     version: "1.0",
     author: "luffy",
     countDown: 5,
-    role: 0,
+    role: 2,
     shortDescription: {
       en: "Send anonymous message to user"
     },
