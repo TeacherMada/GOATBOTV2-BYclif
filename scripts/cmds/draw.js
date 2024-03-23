@@ -39,13 +39,13 @@ module.exports = {
       let promptFromImage = promptResponse.data;
 
    
-      const additionalPrompt = "Cute, HD, Smart, realistic"; 
+      const additionalPrompt = "a character 3D HD, realistic, anyme"; 
 
       
       const combinedPrompt = additionalPrompt + " " + promptFromImage;
 
      
-      let model = 2;
+      let model = 5;
 
     
       if (args.length > 0) {
