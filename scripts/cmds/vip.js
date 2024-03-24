@@ -1,4 +1,4 @@
-#cmd install vip.js const fs = require('fs').promises;
+const fs = require('fs').promises;
 const path = require('path');
 const { getStreamsFromAttachment, log } = global.utils;
 const mediaTypes = ["photo", 'png', "animated_image", "video", "audio"];
