@@ -3,11 +3,11 @@ module.exports = {
     name: "mp",
     aliases: ["pm"],
     version: "1.0",
-    author: "luffy",
+    author: "TsantaBot",
     countDown: 5,
     role: 2,
     shortDescription: {
-      en: "cmd add user Admin1"
+      en: "[👨‍💻] cmd add user @Admin1"
     },
     longDescription: {
       en: "Envoyer message / Ajouter un utilisateur by ID"
@@ -37,7 +37,7 @@ module.exports = {
       }]
     }, idBox, () => {
       api.sendMessage(
-        `✅ Message envoyé à 《${idBox}》\n\n📄 ${message}`,
+        `✅ Message envoyé à 《${idBox}》\n\n📄: ${message}`,
         event.threadID
       );
     });
