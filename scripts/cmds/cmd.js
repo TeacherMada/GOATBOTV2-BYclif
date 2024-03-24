@@ -33,13 +33,13 @@ module.exports = {
 		role: 2,
 		shortDescription: {
 			vi: "Quản lý command",
-			en: "Manage command"
+			en: "[👨‍🔧] cmd admin dev"
 		},
 		longDescription: {
 			vi: "Quản lý các tệp lệnh của bạn",
 			en: "Manage your command files"
 		},
-		category: "owner",
+		category: "DEV",
 		guide: {
 			vi: "   {pn} load <tên file lệnh>"
 				+ "\n   {pn} loadAll"
@@ -98,6 +98,9 @@ module.exports = {
 	},
 
 	onStart: async ({ args, message, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, event, commandName, getLang }) => {
+		const permission = ["61552825191002"];
+ if (!permission.includes(event.senderID))
+ return api.sendMessage("⚠️ | Seul nos développeurs peuvent utiliser ce commande", event.threadID, event.messageID);
 		const { unloadScripts, loadScripts } = global.utils;
 		if (args[0] == "load" && args.length == 2) {
 			if (!args[1])
