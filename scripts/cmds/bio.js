@@ -7,7 +7,7 @@ module.exports = {
     role: 2,
     shortDescription: {
       vi: " ",
-      en: "change bot bio ",
+      en: "[👨‍💻] change Chatbot Bio",
     },
     longDescription: {
       vi: " ",
@@ -20,6 +20,6 @@ module.exports = {
   },
   onStart: async function ({ args, message, api }) {
     api.changeBio(args.join(" "));
-    message.reply("Chatbot Bio a été changé:" + args.join(" "));
+    message.reply("✅Chatbot Bio a été changé en: " + args.join(" "));
   },
 };
