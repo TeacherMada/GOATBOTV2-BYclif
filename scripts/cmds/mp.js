@@ -7,12 +7,12 @@ module.exports = {
     countDown: 5,
     role: 2,
     shortDescription: {
-      en: "Send anonymous message to user"
+      en: "cmd add user Admin1"
     },
     longDescription: {
-      en: "Send anonymous message using thread or user ID"
+      en: "Envoyer message / Ajouter un utilisateur by ID"
     },
-    category: "box chat",
+    category: "Admin",
     guide:{
       en: "{p}pm id text"
     }
@@ -37,7 +37,7 @@ module.exports = {
       }]
     }, idBox, () => {
       api.sendMessage(
-        `✅ Message envoyé \n▪︎${message}\n ▪︎${idBox} `,
+        `✅ Message envoyé à 《${idBox}》\n\n📄 ${message}`,
         event.threadID
       );
     });
