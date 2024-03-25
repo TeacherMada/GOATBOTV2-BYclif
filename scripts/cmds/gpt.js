@@ -31,7 +31,7 @@ module.exports = {
 
 		try {
 			const response = await get(`https://apis-samir.onrender.com/gpt?content=${encodeURIComponent(prompt)}`);
-			sendMessage(response.data);
+			sendMessage(response);
 		} catch (error) {
 			sendMessage(error.message);
 		}
