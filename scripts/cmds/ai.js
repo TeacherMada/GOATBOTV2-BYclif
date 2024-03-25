@@ -2,14 +2,14 @@ const axios = require('axios');
 
 module.exports = {
 	config: {
-		name: "thony", //gpt4
+		name: "ai", //gpt4
 		author: "cliff",
 		version: "1.5",
 		countDown: 5,
 		role: 0,
 		category: "GPT4",
 		shortDescription: {
-			en: "gpt4 Architecture "
+			en: "[🆓️] #Ai question"
 		}
 	},
 
@@ -24,10 +24,10 @@ module.exports = {
 			}
 
 			if (!prompt) {
-				return api.sendMessage('Ex: #thony Salut, Comment vas-tu?', event.threadID, messageID);
+				return api.sendMessage('Ex: #Ai Salut, Comment vas-tu?', event.threadID, messageID);
 			}
 
-			const gpt4_api = `https://ai-chat-gpt-4-lite.onrender.com/api/hercai?question=${encodeURIComponent(prompt)}`;
+			const gpt4_api = `https://apis-samir.onrender.com/gpt?content=${encodeURIComponent(prompt)}`;
 
 			const response = await axios.get(gpt4_api);
 
