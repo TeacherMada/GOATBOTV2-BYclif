@@ -2,17 +2,17 @@ const { get } = require('axios');
 
 module.exports = {
 	config: {
-		name: "gojo",
+		name: "gpt",
 		author: "deku",
 		version: "2.0",
 		cooldowns: 0,
 		role: 0,
 		shortDescription: {
-			en: "[🆓️] Ai Questions"
+			en: "[🆓️] #gpt Questions"
 		},
 		category: "AI",
 		guide: {
-			en: "To use this command, type 'gojo' followed by your message. For example: 'gojo hi'"
+			en: "#gpt question"
 		}
 	},
 
@@ -24,14 +24,14 @@ module.exports = {
 			api.sendMessage(msg, event.threadID, event.messageID);
 		}
 
-		const url = "http://eu4.diresnode.com:3301";
+		//const url = "http://eu4.diresnode.com:3301";
 
-		if (!prompt) return sendMessage("Ex: gojo Salut");
+		if (!prompt) return sendMessage("Ex: #gpt Salut");
 		sendMessage("🕞");
 
 		try {
-			const response = await get(`${url}/gojo_gpt?prompt=${encodeURIComponent(prompt)}&idd=${id}`);
-			sendMessage(response.data.gojo);
+			const response = await get(`https://apis-samir.onrender.com/gpt?content=${encodeURIComponent(prompt)}`);
+			sendMessage(response.data);
 		} catch (error) {
 			sendMessage(error.message);
 		}
