@@ -35,14 +35,15 @@ Example usages:
   },
 
   onStart: async function ({ api, event, args, getLang }) {
-    try {
- if (!isVip(event.author)) {
+   if (!isVip(event.author)) {
             api.sendMessage("Sorry, you are not a VIP member. Please contact the admin(s) to access VIP commands.", event.threadID, event.messageID);
             return;
         }
 
         const senderID = event.senderID;
 
+ 
+      try {
       
       const content = event.type === "message_reply" ? event.messageReply.body : args.join(" ");
       const supportedLanguages = ["fr", "en", "es", "ja", "tl", "vi", "in", "zh"];
