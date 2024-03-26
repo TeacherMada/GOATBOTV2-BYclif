@@ -4,7 +4,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require("path");
 const { config } = global.GoatBot;
-const vipData = fs.readFileSync(path.join(__dirname, "vip.json"), "utf8");
+const vipDataPath = fs.readFileSync(path.join(__dirname, "vip.json"), "utf8");
 const vipJson = JSON.parse(vipData);
 
 function isVip(permission) {
@@ -37,7 +37,7 @@ onStart: async function({ api, event }) {
             api.sendMessage("Sorry, you are not a VIP member. Please contact the admin(s) to access VIP commands.", event.threadID, event.messageID);
             return;
         }
-
+const { senderID, threadID, isGroup } = event;
         const senderID = event.senderID;
     
     const args = event.body.split(/\s+/);
