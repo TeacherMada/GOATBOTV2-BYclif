@@ -37,7 +37,7 @@ onStart: async function({ api, event }) {
             api.sendMessage("Sorry, you are not a VIP member. Please contact the admin(s) to access VIP commands.", event.threadID, event.messageID);
             return;
         }
-const { senderID, threadID, isGroup } = event;
+//const { senderID, threadID, isGroup } = event;
         const senderID = event.senderID;
     
     const args = event.body.split(/\s+/);
