@@ -17,10 +17,7 @@ module.exports = {
     },
     category: "fun",
     guide: {
-      en: "/say [language] [text]: Convert text to speech. Default language is English.
-Example usages:
-/say hi
-/say ja こんにちは"
+      en: "#say [language] [text]"
     },
   },
 
