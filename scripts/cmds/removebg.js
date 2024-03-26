@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs-extra');
 //vip accès 
-const fs = require('fs');
+//const fs = require('fs');
 const path = require("path");
 const vipData = fs.readFileSync(path.join(__dirname, "vip.json"), "utf8");
 const vipJson = JSON.parse(vipData);
