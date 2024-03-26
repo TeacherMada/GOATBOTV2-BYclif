@@ -1,16 +1,6 @@
 const { createReadStream, unlinkSync, createWriteStream } = require("fs-extra");
 const { resolve } = require("path");
 const axios = require("axios");
-//const fs = require('fs');
-//const path = require("path");
-const vipData = fs.readFileSync(path.join(__dirname, "vip.json"), "utf8");
-const vipJson = JSON.parse(vipData);
-
-function isVip(permission) {
-    return vipJson.permission.includes(permission.toString());
-}
-
-
 module.exports = {
   config: {
     name: "say",
@@ -35,15 +25,7 @@ Example usages:
   },
 
   onStart: async function ({ api, event, args, getLang }) {
-   if (!isVip(event.author)) {
-            api.sendMessage("Sorry, you are not a VIP member. Please contact the admin(s) to access VIP commands.", event.threadID, event.messageID);
-            return;
-        }
-
-        const senderID = event.senderID;
-
- 
-      try {
+       try {
       
       const content = event.type === "message_reply" ? event.messageReply.body : args.join(" ");
       const supportedLanguages = ["fr", "en", "es", "ja", "tl", "vi", "in", "zh"];
