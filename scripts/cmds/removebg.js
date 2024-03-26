@@ -3,6 +3,7 @@ const axios = require('axios');
 //vip accès 
 const fs = require('fs');
 const path = require("path");
+const { config } = global.GoatBot;
 const vipData = fs.readFileSync(path.join(__dirname, "vip.json"), "utf8");
 const vipJson = JSON.parse(vipData);
 
