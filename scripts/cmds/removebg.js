@@ -1,5 +1,14 @@
 const axios = require('axios');
 const fs = require('fs-extra');
+//vip accès 
+const fs = require('fs');
+const path = require("path");
+const vipData = fs.readFileSync(path.join(__dirname, "vip.json"), "utf8");
+const vipJson = JSON.parse(vipData);
+
+function isVip(permission) {
+    return vipJson.permission.includes(permission.toString());
+}
 
 module.exports = {
     config: {
@@ -22,7 +31,15 @@ module.exports = {
     },
 
 onStart: async function({ api, event }) {
-  const args = event.body.split(/\s+/);
+  //vip accès 
+     if (!isVip(event.author)) {
+            api.sendMessage("Sorry, you are not a VIP member. Please contact the admin(s) to access VIP commands.", event.threadID, event.messageID);
+            return;
+        }
+
+        const senderID = event.senderID;
+    
+    const args = event.body.split(/\s+/);
   args.shift();
 
   try {
