@@ -43,7 +43,7 @@ const numberSearch = parseInt(keySearch.split("-").pop().trim()) || 4;
 try {
 
 api.sendMessage("🕞 | Attendez svp..", event.threadID, event.messageID);
-const res = await axios.get(`https://api-dalle-gen.onrender.com/dalle3?auth_cookie_U=${_U}&auth_cookie_KievRPSSecAuth=${KievRPSSecAuth}&prompt=${encodeURIComponent(keySearchs)}`);
+const res = await axios.get(`https://apis-dalle-gen.onrender.com/dalle3?auth_cookie_U=${_U}&auth_cookie_KievRPSSecAuth=${KievRPSSecAuth}&prompt=${encodeURIComponent(keySearchs)}`);
 const data = res.data.results.images;
 
 if (!data || data.length === 0) {
