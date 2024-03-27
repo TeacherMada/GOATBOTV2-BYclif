@@ -9,7 +9,7 @@ module.exports = {
         version: "1.0",
         author: "Kshitiz",
         countDown: 5,
-        role: 2,
+        role: 0,
         shortDescription: {
             vi: "",
             en: "[👨‍💻] Gestion membre VIP"
@@ -30,20 +30,20 @@ module.exports = {
             
         },
         en: {
-            missingMessage: "📄 Tuto: \n ▪︎Ajouter un membre: #vip add ID\n ▪︎Supprimé un membre: #vip remove ID\n ▪︎Liste membre VIP: #vip lis \n ▪︎Envoyer message à tous les membre vip: #vip Ex:Salut tous les membre!",
+            missingMessage: "📄 TUTO : \n ▪︎Ajouter un membre: \n#vip add ID\n\n ▪︎Supprimé un membre:\n #vip remove ID\n\n ▪︎Liste membre VIP:\n #vip list \n\n ▪︎Envoyer un message au membre vip:\n #vip Salut tous les membre!",
             sendByGroup: "\n- Sent from group: %1\n- Thread ID: %2",
             sendByUser: "\n- envoyé par un utilisateur",
-            content: "\n\n📄 MESSAGE: %1\n\n ____________\n Répondre cette message pour envoyer aussi un message",
-            success: "Votre message a envoyé à tous les membres VIP avec succès!\n\n %2",
+            content: "\n\n📄 MESSAGE: \n %1\n\n ____________\n Répondez cette message pour répondre cette message",
+            success: "Votre message a été envoyé au membres VIP avec succès!\n\n %2",
             failed: "An error occurred while sending your message to VIP\n%2\nCheck console for more details",
             reply: "↪ Réponse de VIP \n %1:\n\n %2",
             replySuccess: "Votre réponse a été  envoyé au membre VIP avec succès!",
             feedback: "📝 Message d'un membre VIP \n %1:\nID: %2\n%3\n\n📩Message: %4",
             replyUserSuccess: "Votre message a été envoyé au membre VIP avec succès!",
             noAdmin: "Désolé Vous n'avez pas la permission!",
-            addSuccess: "📥 Nouveau membre a été ajouté au VIP liste avec succès!",
+            addSuccess: "📥 Nouveau membre a été ajouté au Liste VIP avec succès!",
             alreadyInVIP: "Member is already in the VIP list!",
-            removeSuccess: "📤 Ce membre a été supprimé au membre VIP avec succès!",
+            removeSuccess: "📤 Ce membre a été supprimé au liste VIP avec succès!",
             notInVIP: "Ce membre n'est pas encore au liste VIP.",
             list: "👑 LISTE MEMBRE VIP:\n\n%1",
         }
@@ -76,7 +76,6 @@ module.exports = {
             const senderName = await usersData.getName(senderID);
             const msg = "👑📨️ VIP MESSAGE 📨️👑"
                 + `\n↪${senderName}`
-                + `\n________________`
 
             const formMessage = {
                 body: msg + getLang("content", args.join(" ")),
@@ -172,7 +171,7 @@ module.exports = {
                 }
                 if (failedIDs.length > 0) {
                     msg2 += getLang("failed", failedIDs.length,
-                        failedIDs.map(item => ` <@${item.adminID}> (${adminNames.find(item2 => item2.id == item.adminID)?.name || item.adminID})`).join("\n")
+                        failedIDs.map(item => ` [@${item.adminID}] (${adminNames.find(item2 => item2.id == item.adminID)?.name || item.adminID})`).join("\n")
                     );
                     log.err("VIP MESSAGE", failedIDs);
                 }
