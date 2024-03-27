@@ -9,10 +9,10 @@ module.exports = {
         version: "1.0",
         author: "Kshitiz",
         countDown: 5,
-        role: 0,
+        role: 2,
         shortDescription: {
             vi: "",
-            en: "handle vip members"
+            en: "[👨‍💻] Gestion membre VIP"
         },
         longDescription: {
             vi: "Gửi tin nhắn đến thành viên VIP",
@@ -30,22 +30,22 @@ module.exports = {
             
         },
         en: {
-            missingMessage: "you need to be vip member to use this feature.",
+            missingMessage: "📄 Tuto: \n ▪︎Ajouter un membre: #vip add ID\n ▪︎Supprimé un membre: #vip remove ID\n ▪︎Liste membre VIP: #vip lis \n ▪︎Envoyer message à tous les membre vip: #vip Ex:Salut tous les membre!",
             sendByGroup: "\n- Sent from group: %1\n- Thread ID: %2",
-            sendByUser: "\n- Sent from user",
-            content: "\n\nContent:%1\nReply this message to send message",
-            success: "Sent your message to VIP successfully!\n%2",
+            sendByUser: "\n- envoyé par un utilisateur",
+            content: "\n\n📄 MESSAGE: %1\n\n ____________\n Répondre cette message pour envoyer aussi un message",
+            success: "Votre message a envoyé à tous les membres VIP avec succès!\n\n %2",
             failed: "An error occurred while sending your message to VIP\n%2\nCheck console for more details",
-            reply: "📍 Reply from VIP %1:\n%2",
-            replySuccess: "Sent your reply to VIP successfully!",
-            feedback: "📝 Feedback from VIP user %1:\n- User ID: %2\n%3\n\nContent:%4",
-            replyUserSuccess: "Sent your reply to VIP user successfully!",
-            noAdmin: "you dont have permission",
-            addSuccess: "Member has been added to the VIP list!",
+            reply: "↪ Réponse de VIP \n %1:\n\n %2",
+            replySuccess: "Votre réponse a été  envoyé au membre VIP avec succès!",
+            feedback: "📝 Message d'un membre VIP \n %1:\nID: %2\n%3\n\n📩Message: %4",
+            replyUserSuccess: "Votre message a été envoyé au membre VIP avec succès!",
+            noAdmin: "Désolé Vous n'avez pas la permission!",
+            addSuccess: "📥 Nouveau membre a été ajouté au VIP liste avec succès!",
             alreadyInVIP: "Member is already in the VIP list!",
-            removeSuccess: "Member has been removed from the VIP list!",
-            notInVIP: "Member is not in the VIP list!",
-            list: "VIP Members list:\n%1",
+            removeSuccess: "📤 Ce membre a été supprimé au membre VIP avec succès!",
+            notInVIP: "Ce membre n'est pas encore au liste VIP.",
+            list: "👑 LISTE MEMBRE VIP:\n\n%1",
         }
     },
 
@@ -74,9 +74,9 @@ module.exports = {
             }
 
             const senderName = await usersData.getName(senderID);
-            const msg = "==📨️ VIP MESSAGE 📨️=="
-                + `\n- User Name: ${senderName}`
-                + `\n- User ID: ${senderID}`
+            const msg = "👑📨️ VIP MESSAGE 📨️👑"
+                + `\n↪${senderName}`
+                + `\n________________`
 
             const formMessage = {
                 body: msg + getLang("content", args.join(" ")),
@@ -124,7 +124,7 @@ module.exports = {
                 const vipData = await fs.readFile(vipDataPath).then(data => JSON.parse(data)).catch(() => ({}));
                 const vipList = vipData.permission ? await Promise.all(vipData.permission.map(async id => {
                     const name = await usersData.getName(id);
-                    return `${id}-(${name})`;
+                    return `▪︎${name}_${id}`;
                 })) : '';
                 return message.reply(getLang("list", vipList.join('\n') || ''));
             }
