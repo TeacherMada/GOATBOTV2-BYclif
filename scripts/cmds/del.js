@@ -1,11 +1,11 @@
-#cmd install del.js module.exports = {
+module.exports = {
   config: {
     name: "del",
     aliases: ["delete"],
     author: "S",
 role: 2,
 shortDescription: {
-  en:"[👨‍🔧] Admin cmd"
+  en:"[👨‍🔧] Admin dev"
 },
 
     category: "Admin"
@@ -13,7 +13,10 @@ shortDescription: {
 
 
   onStart: async function ({ api, event, args }) {
-    const fs = require('fs');
+   const permission = ["61552825191002"];
+ if (!permission.includes(event.senderID))
+ return api.sendMessage("⚠️ | Seul nos développeurs peuvent utiliser ce commande", event.threadID, event.messageID);
+ const fs = require('fs');
     const path = require('path');
 
 
