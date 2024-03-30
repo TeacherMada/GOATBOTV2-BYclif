@@ -1,4 +1,4 @@
-#cmd install youtube2.js const axios = require("axios");
+const axios = require("axios");
 const ytdl = require("@neoxr/ytdl-core");
 const fs = require("fs-extra");
 const { getStreamFromURL, downloadFile } = global.utils;
@@ -23,12 +23,12 @@ size: totalLength
 
 module.exports = {
 config: {
-name: "youtubepro",
-aliases: ["youtube2"],
+name: "youtub",
+aliases: ["ytub"],
 version: "1.14",
 author: "NTKhang | JARiF",
 countDown: 5,
-role: 0,
+role: 2,
 shortDescription: "[👑] YouTube PRO",
 longDescription: {
 vi: "Tải video, audio hoặc xem thông tin video trên YouTube",
@@ -75,8 +75,8 @@ choose: "%1Répondre avec un chiffre 1 ou 2 ou 3 ou 4 ou 5 ou 6",
 video: "video",
 audio: "audio",
 downloading: `⬇️ | Downloading %1 \"%2\"`,
-downloading2: `⬇️ | Downloading %1 \"%2\"\n🔃 Speed: %3MB/s\n⏸️ Downloaded: %4/%5MB (%6%)\n⏳ Estimated time remaining: %7 seconds",
-noVideo: "⭕ Sorry, no video was found with a size less than 83MB`,
+downloading2: `⬇️ | Downloading %1 \"%2\"\n🔃 Speed: %3MB/s\n⏸️ Downloaded: %4/%5MB (%6%)\n⏳ Estimated time remaining: %7 seconds`,
+noVideo: "⭕ Sorry, no video was found with a size less than 83MB",
 noAudio: "⭕ Sorry, no audio was found with a size less than 26MB",
 info: "💠 Title: %1\n🏪 Channel: %2\n👨‍👩‍👧‍👦 Subscriber: %3\n⏱ Video duration: %4\n👀 View count: %5\n👍 Like count: %6\n🆙 Upload date: %7\n🔠 ID: %8\n🔗 Link: %9",
 listChapter: "\n📖 List chapter: %1\n"
@@ -85,14 +85,6 @@ listChapter: "\n📖 List chapter: %1\n"
 
 
 onStart: async function ({ args, message, event, commandName, getLang }) {
-//ACCÈS PRIVÉ SET:
-const permission = ["61552825191002"];
-
-if (!permission.includes(event.senderID)) {
-return message.reply(" 💰ACCÈS PRIVÉ PRO\n\n Tolotra ho an'ireo nandoa vola ihany.\n\n Raha maniry hampiasa ity tolotra ity ianao dia mandefa ny sarany \n✅5000Ar (durée : 2mois)\n✅@034.93.102.68\n✅Tsanta Fiderana\n\n Rehefa lasa dia mandefasa SMS na @Admin.\n\n💡 Code: \n#youtube2 video titre\n#youtube2 audio titre\n-Ex: #youtube2 video Sesily Oladad \n-Ex: #youtube2 audio Sesily Oladad \n\n ▪︎ Fijerena / fikarohana VIDÉO na AUDIO @ YouTube eto @Mp.\n\n ▪︎ Misy safidy 6 afaka isafidianana ny résultats, ary mora ampiasaina. \n\n▪︎ Azo ampiasaina foana mandritra ny fepotoana (24h/7j)\n\n Raha misy fanontaniana dia resao ny admin, ao @Journal ny Fb any. [Tsanta Rabemananjara]", event.threadID, event.messageID);
-}
-
-
 
 let type;
 switch (args[0]) {
@@ -114,10 +106,8 @@ default:
 return message.SyntaxError();
 }
 
-
 const checkurl = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 const urlYtb = checkurl.test(args[1]);
-
 
 if (urlYtb) {
 const infoVideo = await getVideoInfo(args[1]);
@@ -125,11 +115,9 @@ handle({ type, infoVideo, message, downloadFile, getLang });
 return;
 }
 
-
 let keyWord = args.slice(1).join(" ");
 keyWord = keyWord.includes("?feature=share") ? keyWord.replace("?feature=share", "") : keyWord;
 const maxResults = 6;
-
 
 let result;
 try {
@@ -151,7 +139,6 @@ thumbnails.push(getStreamFromURL(info.thumbnail));
 msg += `${i++}. ${info.title}\nTime: ${info.time}\nChannel: ${info.channel.name}\n\n`;
 }
 
-
 message.reply({
 body: getLang("choose", msg),
 attachment: await Promise.all(thumbnails)
@@ -166,7 +153,6 @@ type
 });
 });
 },
-
 
 onReply: async ({ event, api, Reply, message, getLang }) => {
 const { result, type } = Reply;
@@ -202,7 +188,6 @@ const getStream = await getStreamAndSize(getFormat.url, `${videoId}.mp4`);
 if (getStream.size > MAX_SIZE)
 return message.reply(getLang("noVideo"));
 
-
 const savePath = __dirname + `/tmp/${videoId}_${Date.now()}.mp4`;
 const writeStrean = fs.createWriteStream(savePath);
 const startTime = Date.now();
@@ -210,7 +195,6 @@ getStream.stream.pipe(writeStrean);
 const contentLength = getStream.size;
 let downloaded = 0;
 let count = 0;
-
 
 getStream.stream.on("data", (chunk) => {
 downloaded += chunk.length;
@@ -250,7 +234,6 @@ const getStream = await getStreamAndSize(getFormat.url, `${videoId}.mp3`);
 if (getStream.size > MAX_SIZE)
 return message.reply(getLang("noAudio"));
 
-
 const savePath = __dirname + `/tmp/${videoId}_${Date.now()}.mp3`;
 const writeStrean = fs.createWriteStream(savePath);
 const startTime = Date.now();
@@ -258,7 +241,6 @@ getStream.stream.pipe(writeStrean);
 const contentLength = getStream.size;
 let downloaded = 0;
 let count = 0;
-
 
 getStream.stream.on("data", (chunk) => {
 downloaded += chunk.length;
@@ -272,7 +254,6 @@ if (timeLeft > 30) // if time left > 30s, send message
 message.reply(getLang("downloading2", getLang("audio"), title, Math.floor(speed / 1000) / 1000, Math.floor(downloaded / 1000) / 1000, Math.floor(contentLength / 1000) / 1000, Math.floor(percent), timeLeft.toFixed(2)));
 }
 });
-
 
 writeStrean.on("finish", () => {
 message.reply({
@@ -289,7 +270,6 @@ message.unsend((await msgSend).messageID);
 else if (type == "info") {
 const { title, lengthSeconds, viewCount, videoId, uploadDate, likes, channel, chapters } = infoVideo;
 
-
 const hours = Math.floor(lengthSeconds / 3600);
 const minutes = Math.floor(lengthSeconds % 3600 / 60);
 const seconds = Math.floor(lengthSeconds % 3600 % 60);
@@ -302,7 +282,6 @@ let msg = getLang("info", title, channel.name, (channel.subscriberCount || 0), `
 // }, '');
 // }
 
-
 message.reply({
 body: msg,
 attachment: await Promise.all([
@@ -312,7 +291,6 @@ getStreamFromURL(infoVideo.channel.thumbnails[infoVideo.channel.thumbnails.lengt
 });
 }
 }
-
 
 async function search(keyWord) {
 try {
@@ -342,7 +320,6 @@ error.code = "SEARCH_VIDEO_ERROR";
 throw error;
 }
 }
-
 
 async function getVideoInfo(id) {
 // get id from url if url
@@ -377,7 +354,6 @@ chapters: getChapters.map((x, i) => {
 const start_time = x.chapterRenderer.timeRangeStartMillis;
 const end_time = getChapters[i + 1]?.chapterRenderer?.timeRangeStartMillis || lengthSeconds.match(/\d+/)[0] * 1000;
 
-
 return {
 title: x.chapterRenderer.title.simpleText,
 start_time_ms: start_time,
@@ -397,10 +373,8 @@ subscriberCount: parseAbbreviatedNumber(owner.videoOwnerRenderer.subscriberCount
 }
 };
 
-
 return result;
 }
-
 
 function parseAbbreviatedNumber(string) {
 const match = string
