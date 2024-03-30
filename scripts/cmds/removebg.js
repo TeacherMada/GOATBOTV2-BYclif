@@ -2,44 +2,30 @@ const axios = require('axios');
 //const fs = require('fs-extra');
 //vip accès 
 const fs = require('fs');
+
 const path = require("path");
 const { config } = global.GoatBot;
-const vipDataPath = fs.readFileSync(path.join(__dirname, "vip.json"), "utf8");
-const vipJson = JSON.parse(vipData);
-
-function isVip(permission) {
-    return vipJson.permission.includes(permission.toString());
-}
-
 module.exports = {
     config: {
       name: "removebg",
       aliases: ["rmbg"],
       author: "Hazeyy/kira", // hindi ito collab, ako kasi nag convert :>
       version: "69",
-      cooldowns: 5,
-      role: 0,
+      cooldown: 15,
+      role: 2,
       shortDescription: {
-        en: "Remove background in your photo"
+        en: "[👑] Remove background photo"
       },
       longDescription: {
         en: "Remove background in your photo"
       },
-      category: "img",
+      category: "iimage",
       guide: {
         en: "{p}{n} [reply to an img]"
       }
     },
 
 onStart: async function({ api, event }) {
-  //vip accès 
-     if (!isVip(event.author)) {
-            api.sendMessage("Sorry, you are not a VIP member. Please contact the admin(s) to access VIP commands.", event.threadID, event.messageID);
-            return;
-        }
-//const { senderID, threadID, isGroup } = event;
-        const senderID = event.senderID;
-    
     const args = event.body.split(/\s+/);
   args.shift();
 
@@ -55,7 +41,7 @@ onStart: async function({ api, event }) {
     let photoUrl = event.messageReply ? event.messageReply.attachments[0].url : args.join(" ");
 
     if (!photoUrl) {
-      api.sendMessage("📸 Répondre une photo, puis ajouter #removebg", threadID, messageID);
+      api.sendMessage("📸 Répondez une photo, puis ajouter #removebg", threadID, messageID);
       return;
     }
 
